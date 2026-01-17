@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectMisa.Core", "FinalProjectMisa.Core\FinalProjectMisa.Core.csproj", "{DCC5AA68-948D-4FCF-A9C7-795621698352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectMisa.Infrastructure", "FinalProjectMisa.Infrastructure\FinalProjectMisa.Infrastructure.csproj", "{71E3F944-AF0A-4FA4-97E2-5E00A7891427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectMisa.Api", "FinalProjectMisa.Api\FinalProjectMisa.Api.csproj", "{6A6B887F-CFAB-4F6F-AA6A-6CF8A795D1FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCC5AA68-948D-4FCF-A9C7-795621698352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC5AA68-948D-4FCF-A9C7-795621698352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC5AA68-948D-4FCF-A9C7-795621698352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC5AA68-948D-4FCF-A9C7-795621698352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E3F944-AF0A-4FA4-97E2-5E00A7891427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E3F944-AF0A-4FA4-97E2-5E00A7891427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E3F944-AF0A-4FA4-97E2-5E00A7891427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E3F944-AF0A-4FA4-97E2-5E00A7891427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6B887F-CFAB-4F6F-AA6A-6CF8A795D1FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6B887F-CFAB-4F6F-AA6A-6CF8A795D1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6B887F-CFAB-4F6F-AA6A-6CF8A795D1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6B887F-CFAB-4F6F-AA6A-6CF8A795D1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

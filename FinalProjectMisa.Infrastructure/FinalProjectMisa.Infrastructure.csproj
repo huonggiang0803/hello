@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FinalProjectMisa.Core\FinalProjectMisa.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.1.66" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.3.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.1" />
+      <PackageReference Include="MySqlConnector" Version="2.5.0" />
+    </ItemGroup>
+
+</Project>
