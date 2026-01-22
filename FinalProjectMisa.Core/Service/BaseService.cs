@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FinalProjectMisa.Core.Entities;
 using FinalProjectMisa.Core.Exceptions;
 using FinalProjectMisa.Core.Interface.Repository;
 using FinalProjectMisa.Core.Interface.Service;
@@ -35,6 +36,11 @@ public class BaseService<T> : IBaseService<T>
                 pkProp.SetValue(entity, Guid.NewGuid());
             }
         }
+
+        if (entity is BaseEntity baseEntity)
+        {
+            baseEntity.created_date = DateTime.Now;
+        }
         await ValidateData(entity);
         var result = await _baseRepo.InsertAsync(entity);
         return result;
@@ -43,6 +49,10 @@ public class BaseService<T> : IBaseService<T>
     public async Task<int> UpdateServiceAsync(Guid id, T entity)
     {
         await ValidateData(entity);
+        if (entity is BaseEntity baseEntity)
+        {
+            baseEntity.modified_date = DateTime.Now;
+        }
         var result = await _baseRepo.UpdateAsync(id, entity);
         return result;
     }

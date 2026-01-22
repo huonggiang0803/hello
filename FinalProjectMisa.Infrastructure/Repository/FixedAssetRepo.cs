@@ -17,7 +17,8 @@ public class FixedAssetRepo : BaseRepo<FixedAssetEntity>, IFixedAssetRepo
         {
             using var connection = CreateConnection();
             var sql = $@"{GetBaseSelectQuery()} 
-                     ORDER BY {TableAlias}.{nameof(FixedAssetEntity.created_date)} DESC;";
+                 ORDER BY COALESCE ({TableAlias}.{nameof(FixedAssetEntity.modified_date)}, 
+                                   {TableAlias}.{nameof(FixedAssetEntity.created_date)}) DESC;";
 
             return await connection.QueryAsync<FixedAssetDto>(sql);
         }
@@ -56,14 +57,15 @@ public async Task<PagedResult<FixedAssetDto>> GetFilterAsync(FixedAssetFilterDto
 
     var whereClause = whereSql.Any() ? "WHERE " + string.Join(" AND ", whereSql) : "";
 
-    // 2. Chuẩn bị SQL
-    var sqlData = $@"
-        {GetBaseSelectQuery()}
-        {whereClause}
-        ORDER BY {TableAlias}.{nameof(FixedAssetEntity.created_date)} DESC
-        LIMIT @Limit OFFSET @Skip;";
+       
+        var sqlData = $@"
+    {GetBaseSelectQuery()}
+    {whereClause}
+    ORDER BY COALESCE({TableAlias}.{nameof(FixedAssetEntity.modified_date)}, 
+                      {TableAlias}.{nameof(FixedAssetEntity.created_date)}) DESC
+    LIMIT @Limit OFFSET @Skip;";
 
-    var sqlCount = $"SELECT COUNT(*) FROM fixed_asset {TableAlias} {whereClause}";
+        var sqlCount = $"SELECT COUNT(*) FROM fixed_asset {TableAlias} {whereClause}";
 
     // Thêm tham số phân trang
     var skip = (filterDto.PageNumber - 1) * filterDto.PageSize;
@@ -116,7 +118,8 @@ public async Task<FixedAssetDto> GetAssetByIdWithDetailAsync(Guid assetId)
             {tDept}.{nameof(DepartmentEntity.department_name)},
             {tDept}.{nameof(DepartmentEntity.department_code)},
             {tCat}.{nameof(FixedAssetCategoryEntity.fixed_asset_category_code)},
-            {tCat}.{nameof(FixedAssetCategoryEntity.fixed_asset_category_name)}
+            {tCat}.{nameof(FixedAssetCategoryEntity.fixed_asset_category_name)},
+            {tCat}.{nameof(FixedAssetCategoryEntity.life_time)}
         FROM fixed_asset {tAsset}
         LEFT JOIN department {tDept} 
             ON {tAsset}.{nameof(FixedAssetDto.department_id)} = {tDept}.{nameof(DepartmentEntity.department_id)}
@@ -184,7 +187,8 @@ SELECT
     d.department_name, 
 d.department_code, 
     c.fixed_asset_category_name 
-, c.fixed_asset_category_code
+, c.fixed_asset_category_code,
+c.life_time AS usage_years,
 FROM {safeTableName} a
 LEFT JOIN department d ON a.department_id = d.department_id
 LEFT JOIN fixed_asset_category c ON a.fixed_asset_category_id = c.fixed_asset_category_id
